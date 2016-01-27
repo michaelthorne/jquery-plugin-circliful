@@ -20,12 +20,13 @@
             border: 'default',
             complete: null,
             bordersize: 10,
-            delay: 0
+            delay: 0,
+            linecap: 'butt'
         }, options);
 
         return this.each(function () {
 
-            var customSettings = ["fgcolor", "bgcolor", "fill", "width", "dimension", "fontsize", "animationstep", "endPercent", "icon", "iconcolor", "iconsize", "border", "startdegree", "bordersize", "delay"];
+            var customSettings = ["fgcolor", "bgcolor", "fill", "width", "dimension", "fontsize", "animationstep", "endPercent", "icon", "iconcolor", "iconsize", "border", "startdegree", "bordersize", "delay", "linecap"];
 
             var customSettingsObj = {};
             var icon = '';
@@ -236,7 +237,7 @@
              */
             function animate(current) {
 
-
+                bgrCircle ();
                 context.beginPath();
                 context.arc(x, y, radius, -(quart) + additionalAngelPI, ((circ) * current) - quart + additionalAngelPI, false);
 
@@ -246,6 +247,7 @@
                     context.lineWidth = customSettingsObj.width - customSettingsObj.bordersize;
                 }
 
+                context.lineCap = customSettingsObj.linecap;
                 context.strokeStyle = customSettingsObj.fgcolor;
                 context.stroke();
 
@@ -264,8 +266,6 @@
                     }
                 }
             }
-
-            bgrCircle ();
 
             setTimeout(function () {
                 animate(curPerc / 100);
